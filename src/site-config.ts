@@ -1,11 +1,11 @@
 export const siteConfig = {
-  author: 'Kaivan Wong',
-  title: 'Vitesse theme for Astro',
-  subtitle: 'Supports Vue and UnoCSS.',
-  description: 'Vitesse theme for Astro blog, supports Vue and UnoCSS.',
+  author: 'Banmao',
+  title: 'Banmao',
+  subtitle: 'Banmao\'s blog.',
+  description: '',
   image: {
     src: '/preview.jpg',
-    alt: 'Vitesse theme for Astro - Supports Vue and UnoCSS.',
+    alt: 'Banmao',
   },
   email: '',
   headerNavLinks: [
@@ -60,7 +60,7 @@ export const siteConfig = {
       title: 'Develop Templates',
       projects: [
         {
-          text: 'Frosty Web',
+          text: 'NOX UI',
           description: 'A clean and minimalist website template designed to showcase content with style.',
           icon: 'i-carbon-webhook',
           href: '',
@@ -71,19 +71,19 @@ export const siteConfig = {
       title: 'Framework',
       projects: [
         {
-          text: 'Pixel Craft',
+          text: 'NOX Craft',
           description: 'Frontend framework for crafting pixel-perfect web applications with a responsive design.',
           icon: 'i-carbon-pen-fountain',
           href: '',
         },
         {
-          text: 'Aurora UI',
+          text: 'NOX UI',
           description: 'Modern UI library designed to streamline frontend development with modular components.',
           icon: 'i-carbon-mountain',
           href: '',
         },
         {
-          text: 'Nimbus CSS',
+          text: 'PORTAL',
           description: 'Lightweight CSS framework for building responsive websites with a flexible grid system.',
           icon: 'i-carbon-face-satisfied',
           href: '',
@@ -119,11 +119,11 @@ export const siteConfig = {
     },
     {
       text: 'Contact Me',
-      href: 'mailto:kaivanwong@outlook.me',
+      href: 'mailto:banmao2020@gmail.com',
     },
     {
       text: 'Github Repo',
-      href: 'https://github.com/kaivanwong/vitesse-astro-theme',
+      href: 'https://github.com/banmao/blog.banmao.cc',
     },
   ],
 }
