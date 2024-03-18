@@ -2,6 +2,7 @@
 title: 如何在Git中删除远程分支
 description: 如何在Git中删除远程分支
 tags: [git, branch, remove, delete]
+duration: "2min"
 date: "2024-03-18"
 ---
 
