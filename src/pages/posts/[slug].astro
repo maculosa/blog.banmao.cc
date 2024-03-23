@@ -18,7 +18,7 @@ type Props = { post: CollectionPosts }
 
 const { post } = Astro.props
 const { title, image, description } = post.data
-const { Content } = await post.render()
+const { Content, remarkPluginFrontmatter } = await post.render()
 ---
 
 <BaseLayout
@@ -34,6 +34,9 @@ const { Content } = await post.render()
         {title}
       </h1>
     </header>
+    <span class="text-gray"
+      >阅读时长：{remarkPluginFrontmatter.minutesRead}</span
+    >
     <div class="max-w-none prose">
       <Content />
     </div>
