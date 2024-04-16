@@ -4,6 +4,7 @@ import { THEME_CONFIG } from "./src/theme.config";
 import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
     }),
     robotsTxt(),
     sitemap(),
-    mdx()
+    mdx(),
+    icon()
   ]
 });

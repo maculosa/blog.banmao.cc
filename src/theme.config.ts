@@ -26,8 +26,8 @@ export const THEME_CONFIG: App.Locals['config'] = {
       href: "https://twitter.com/maculosa",
     },
     {
-      name: "mastodon",
-      href: "https://github.com/moeyua/astro-theme-typography",
+      name: "instagram",
+      href: "https://instagram.com/maculosa",
     }
   ],
   /** your header info */
@@ -41,12 +41,20 @@ export const THEME_CONFIG: App.Locals['config'] = {
       href: "/posts/page/1",
     },
     {
+      name: 'Go',
+      href: "/golang"
+    },
+    {
       name: "Archive",
       href: "/archive",
     },
     {
       name: "Categories",
       href: "/categories"
+    },
+    {
+      name: "项目",
+      href: "/projects"
     },
     {
       name: "About",

@@ -12,7 +12,7 @@ declare namespace App {
       /** your deployed domain */
       website: string;
       /** your locale */
-      locale: keyof typeof import('./i18n.js').LANGUAGES;
+      locale: keyof typeof import('./i18n.ts').LANGUAGES;
       /** theme style */
       themeStyle: 'light' | 'auto' | 'dark';
       /** your socials */
