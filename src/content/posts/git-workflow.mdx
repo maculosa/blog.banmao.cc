@@ -1,0 +1,78 @@
+---
+title: Git 工作流
+description: git workflow
+tags: [git, workflow]
+categories: [git]
+lang: zh
+pubDate: "2024-03-23 12:27:21"
+---
+
+
+## 第一步：新建分支
+首先，每次开发新功能 ，都应该新建一个单独的分支。
+
+```bash
+# 获取主干最新代码
+git switch main
+git pull
+
+# 新建一个开发分支 feature/xxx
+git switch -c feature/xxx
+```
+
+## 第二步：提交分支 commit
+分支修改后，先不要提交，先用 `git status` 查看一下，是不是都已暂存起来，然后再运行提交命令 `git commit`。
+
+```bash
+git add .
+git status
+# 提交代码
+git commit --verbose
+```
+
+git status 命令，用来查看发生变动的文件。
+git commit 命令的 verbose 参数，会列出 diff 的结果。
+
+## 第三步：撰写提交信息
+提交 commit 时，必须给出完整扼要的提交信息，下面是一个范本。
+
+```
+Present-tense summary under 50 characters
+
+* More information about the commit here(under 72 characters).
+* More information about the commit here(under 72 characters).
+
+http://project.management-system.com/ticket/123
+```
+
+第一行是摘要，不超过 50 个字符。然后空一行，罗列修改了哪些文件，以及详细说明修改的理由。
+
+最后，提供对应的网址（比如 Bug 管理系统或 Jira 系统的 Ticket 网址），方便后续的查证。
+
+## 第四步：与主干同步
+分支的开发过程中，要经常与主干保持同步。
+
+```bash
+git fetch origin
+git rebase origin/main
+```
+
+## 第五步：合并 commit
+分支开发完成后，很可能有一堆 commit，但是合并到主干的时候，往往希望只有一个（或最多两三个）commit，这样不仅清晰，也容易管理。
+那么，怎样才能将多个 commit 合并呢？这就要用到 git rebase 命令。
+
+```bash
+git rebase -i origin/main
+```
+
+## 第六步：推送到远程仓库
+合并 commit 后，就可以推送当前分支到远程仓库了。
+
+```bash
+git push --force origin feature/xxx
+```
+git push 命令要加上 force 参数，因为 rebase 以后，分支历史改变了，跟远程分支不一定兼容，有可能要强行推送。
+
+## 第七步：发布pull Request
+
+提交到远程仓库以后，就可以发出 Pull Request 到 main 分支，然后请求别人进行代码 review，确认可以合并到 main。
