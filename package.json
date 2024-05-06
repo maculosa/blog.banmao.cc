@@ -26,7 +26,7 @@
     "giscus": "^1.5.0",
     "typescript": "^5.4.5",
     "vite": "^5.2.10",
-    "vue": "^3.4.23"
+    "vue": "^3.4.26"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.66",
