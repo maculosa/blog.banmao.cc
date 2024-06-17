@@ -42,7 +42,7 @@ export const THEME_CONFIG: App.Locals['config'] = {
     },
     {
       name: 'Go',
-      href: "/golang"
+      href: "/go"
     },
     {
       name: "Archive",
@@ -51,6 +51,10 @@ export const THEME_CONFIG: App.Locals['config'] = {
     {
       name: "Categories",
       href: "/categories"
+    },
+    {
+      name: "树莓派",
+      href: "/posts/raspberrypi"
     },
     {
       name: "项目",

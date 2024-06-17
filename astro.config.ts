@@ -22,10 +22,10 @@ export default defineConfig({
         UnoCSS({
             injectReset: true,
         }),
-        // robotsTxt(),
+        robotsTxt(),
         sitemap(),
         mdx(),
-        // icon(),
+        icon(),
         vue(),
     ],
 })
