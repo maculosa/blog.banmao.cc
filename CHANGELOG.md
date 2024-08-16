@@ -1,4 +1,8 @@
 
+## v0.1.2-beta.1
+
+[compare changes](https://github.com/maculosa/blog.banmao.cc/compare/v0.1.2-beta.1...v0.1.2-beta.1)
+
 ## v0.1.0
 
 
