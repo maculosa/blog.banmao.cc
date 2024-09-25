@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-4">
+  <div class="flex lt-sm:flex-col gap-4">
     <Card title="金额录入">
       <template #header-extra>
         <button
@@ -29,39 +29,50 @@
 
       <div class="w-100% b-b-2 b-dashed my-4"></div>
 
-      <form class="transition p-4 rounded-4 grid gap-4">
-        <div class="flex items-center gap-4">
-          <label for="total" class="font-bold min-w-120px text-right"
-            >总金额：</label
-          >
-          <input
-            class="flex-1 h-32px p-16px border-1 rounded-1"
-            type="number"
-            id="total"
-            v-model="formModel.total"
-            placeholder="Total" />
+      <form class="transition p-4 rounded-4 flex flex-col gap-4">
+        <div class="flex lt-sm:flex-col lt-sm:items-start items-center gap-4">
+          <label
+            for="total"
+            class="font-bold min-w-120px lt-sm:text-left text-right">
+            总金额：
+          </label>
+          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
+            <input
+              type="number"
+              id="total"
+              v-model="formModel.total"
+              placeholder="Total" />
+          </div>
         </div>
-        <div class="flex items-center gap-4">
-          <label for="total" class="font-bold min-w-120px text-right"
-            >分隔次数：</label
-          >
-          <input
-            class="flex-1 h-32px p-16px border-1 rounded-1"
-            type="number"
-            id="total"
-            v-model="formModel.partsCount"
-            placeholder="partsCount" />
+        <div class="flex lt-sm:flex-col lt-sm:items-start items-center gap-4">
+          <label
+            for="total"
+            class="font-bold min-w-120px lt-sm:text-left text-right">
+            分隔次数：
+          </label>
+          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
+            <input
+              class="w-100% h-100%"
+              type="number"
+              id="total"
+              v-model="formModel.partsCount"
+              placeholder="partsCount" />
+          </div>
         </div>
-        <div class="flex items-center gap-4">
-          <label for="total" class="font-bold min-w-120px text-right"
-            >浮动范围（%）：</label
-          >
-          <input
-            class="flex-1 h-32px p-16px border-1 rounded-1"
-            type="number"
-            id="total"
-            v-model="formModel.percentageRange"
-            placeholder="partsCount" />
+        <div class="flex lt-sm:flex-col lt-sm:items-start items-center gap-4">
+          <label
+            for="total"
+            class="font-bold min-w-120px lt-sm:text-left text-right">
+            浮动范围(%):
+          </label>
+          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
+            <input
+              class="w-100% h-100%"
+              type="number"
+              id="total"
+              v-model="formModel.percentageRange"
+              placeholder="partsCount" />
+          </div>
         </div>
         <div class="flex gap-4 justify-center">
           <button
