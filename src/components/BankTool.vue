@@ -2,33 +2,21 @@
   <div class="flex lt-sm:flex-col gap-4">
     <Card title="金额录入">
       <template #header-extra>
-        <button
-          type="button"
-          class="cursor-pointer text-white transition-all text-14px px-2 py-1 rounded-1 bg-blue-600 hover:bg-blue-500 hover:shadow"
-          @click="handleAdd"
-        >
-          新增
-        </button>
+        <b-button type="primary" size="mini" @click="handleAdd">新增</b-button>
       </template>
       <div
         class="flex items-center gap-2 mb-4"
         v-for="(item, index) in items"
         :key="item"
       >
-        <label class="font-bold">金额 {{ index + 1 }}: </label>
-        <input
-          class="flex-1 h-32px p-16px border-1 rounded-1"
+        <label class="font-bold text-nowrap">金额 {{ index + 1 }}: </label>
+        <b-input
           v-model="amount[index]"
-          type="text"
           :placeholder="`金额 ${index + 1}`"
         />
-        <button
-          type="button"
-          class="flex justify-center items-center h-30px w-30px bg-red-100 text-red-5 rounded-4 hover:shadow"
-          @click="handleDelete(index)"
-        >
-          <div class="w-12px h-2px bg-red-600"></div>
-        </button>
+        <b-button type="danger" size="mini" @click="handleDelete(index)">
+          <b-icon #icon icon="hugeicons:minus-sign-square" />
+        </b-button>
       </div>
 
       <div class="w-100% b-b-2 b-dashed my-4"></div>
@@ -39,33 +27,24 @@
             for="total"
             class="font-bold min-w-120px lt-sm:text-left text-right"
           >
-            总金额：
+            总金额:
           </label>
-          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
-            <input
-              type="number"
-              id="total"
-              v-model="formModel.total"
-              placeholder="Total"
-            />
-          </div>
+          <b-input
+            v-model="formModel.total"
+            placeholder="总金额"
+          />
         </div>
         <div class="flex lt-sm:flex-col lt-sm:items-start items-center gap-4">
           <label
             for="total"
             class="font-bold min-w-120px lt-sm:text-left text-right"
           >
-            分隔次数：
+            分隔次数:
           </label>
-          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
-            <input
-              class="w-100% h-100%"
-              type="number"
-              id="total"
-              v-model="formModel.partsCount"
-              placeholder="partsCount"
-            />
-          </div>
+          <b-input
+            v-model="formModel.partsCount"
+            placeholder="分隔次数"
+          />
         </div>
         <div class="flex lt-sm:flex-col lt-sm:items-start items-center gap-4">
           <label
@@ -74,24 +53,15 @@
           >
             浮动范围(%):
           </label>
-          <div class="w-100% box-border h-32px px-4 border-1 rounded-1">
-            <input
-              class="w-100% h-100%"
-              type="number"
-              id="total"
-              v-model="formModel.percentageRange"
-              placeholder="partsCount"
-            />
-          </div>
+          <b-input
+            v-model="formModel.percentageRange"
+            placeholder="浮动范围"
+          />
         </div>
         <div class="flex gap-4 justify-center">
-          <button
-            type="button"
-            class="w-100% block py-8px px-16px border-1 rounded-2 text-white transition bg-blue-600 hover:bg-blue-400"
-            @click="handleComputed"
-          >
+          <b-button type="primary" block @click="handleComputed">
             计算
-          </button>
+          </b-button>
         </div>
       </form>
     </Card>
@@ -99,21 +69,21 @@
     <Card title="计算结果">
       <template #header-extra>
         <div class="flex gap-2 items-center">
-          <button
-            type="button"
-            class="cursor-pointer transition-all text-14px px-2 py-1 border-1 rounded-1 hover:bg-gray-200 hover:shadow"
+          <b-button
+            type="primary"
+            size="mini"
             @click="handleExportImg"
           >
-            <div class="i-hugeicons:image-download" />
-          </button>
-          <button
-            type="button"
-            class="cursor-pointer text-white transition-all text-14px px-2 py-1 rounded-1 bg-blue-600 hover:bg-blue-500 hover:shadow"
+            <b-icon #icon icon="hugeicons:image-download" />
+          </b-button>
+          <b-button
+            type="primary"
+            size="mini"
             v-if="historyList.length > 0"
             @click="checkedRecord = true"
           >
             上次记录
-          </button>
+          </b-button>
         </div>
       </template>
       <table id="table-data" border class="w-full bg-white mt-4">
@@ -149,6 +119,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch } from "vue";
 import Card from "./Card/index.vue";
+import BButton from './Button/index.vue'
+import BIcon from './Icon/index.vue'
+import BInput from "./Input/index.vue";
 import html2canvas from "html2canvas";
 
 defineOptions({
@@ -213,9 +186,9 @@ function getTotal(arr: number[]) {
       if (typeof current !== "number") {
         throw new Error("Array must contain only numbers");
       }
-      if (current < 0) {
-        throw new Error("Array must contain only non-negative integers");
-      }
+      // if (current < 0) {
+      //   throw new Error("Array must contain only non-negative integers");
+      // }
       return total + current;
     }, 0);
 }
