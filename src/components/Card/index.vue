@@ -1,6 +1,6 @@
 <template>
   <div class="card flex-col gap-4 bg-#fff mb-4 rounded-4 shadow p-4">
-    <div class="flex justify-between items-center b-b-gray-200 b-b-1">
+    <div class="flex justify-between items-center pb-2 b-b-gray-200 b-b-1">
       <h5 class="font-bold text-#333">{{ title }}</h5>
 
       <slot name="header-extra" />
