@@ -2,7 +2,9 @@
   <div class="flex lt-sm:flex-col gap-4">
     <Card title="金额录入">
       <template #header-extra>
-        <b-button type="primary" size="mini" @click="handleAdd">新增</b-button>
+        <b-button type="primary" size="mini" @click="handleAdd">
+          <b-icon #icon icon="hugeicons:plus-sign-square" />
+        </b-button>
       </template>
       <div
         class="flex items-center gap-2 mb-4"
