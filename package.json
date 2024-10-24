@@ -33,6 +33,7 @@
   "devDependencies": {
     "@iconify-json/hugeicons": "^1.2.1",
     "@iconify-json/mdi": "^1.1.68",
+    "@iconify/vue": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^20.14.15",
     "@types/sanitize-html": "^2.11.0",

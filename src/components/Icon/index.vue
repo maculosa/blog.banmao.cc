@@ -1,7 +1,8 @@
 <template>
-    <div :class="`i-${props.icon} w-1em h-1em`"></div>
+    <Icon :icon="props.icon"></Icon>
 </template>
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
 
 interface IconProps {
     icon: string
