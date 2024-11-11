@@ -38,7 +38,7 @@
     "@types/node": "^22.7.9",
     "@types/sanitize-html": "^2.13.0",
     "@unocss/preset-icons": "^0.63.6",
-    "@unocss/reset": "^0.63.6",
+    "@unocss/reset": "^0.64.0",
     "@unocss/transformer-directives": "^0.63.6",
     "bumpp": "^9.7.1",
     "changelogen": "^0.5.7",
