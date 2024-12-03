@@ -4,7 +4,7 @@ import LayoutDefault from "~/layouts/LayoutDefault.astro";
 import { getPosts, getPostDescription } from "~/utils";
 
 const posts = (await getPosts()).filter(post => {
-    return post.data.categories && post.data.categories.includes('go');
+    return post.data.categories && post.data.categories.includes('go')
 })
 
 ---

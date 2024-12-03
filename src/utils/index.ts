@@ -21,7 +21,7 @@ export async function getCategories() {
 }
 
 export async function getPosts() {
-  const posts = await getCollection('posts')
+  const posts = await getCollection('posts', ({ data }) => data.draft !== true)
   posts.sort((a, b) => {
     const aDate = a.data.pubDate || new Date()
     const bDate = b.data.pubDate || new Date()
