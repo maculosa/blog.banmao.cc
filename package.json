@@ -47,6 +47,6 @@
     "lint-staged": "^15.2.10",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.1",
-    "unocss": "^0.65.0"
+    "unocss": "^0.65.1"
   }
 }
