@@ -39,12 +39,12 @@ article.heti a code:hover {
 }
 
 
-a:hover {
+/* a:hover {
   color: theme("colors.background");
   background-color: theme("colors.foreground");
-  /* border-bottom: solid transparent 2px; */
-  /* text-decoration: none; */
-}
+  border-bottom: solid transparent 2px;
+  text-decoration: none;
+} */
 
 a.normal {
   /* border: none; */

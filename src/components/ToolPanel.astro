@@ -1,0 +1,24 @@
+---
+interface Props {
+	url: string;
+	name: string;
+	color?: string;
+}
+
+const { url, name, color } = Astro.props;
+
+const background = color ? `bg-${color}` : "bg-amber";
+const shadowColor = color ? `hover:shadow-${color}` : "hover:shadow-amber";
+---
+
+<div
+    class={`w-full h-100px px-4 flex place-content-center place-items-center transition-all rounded-lg hover:shadow-2xl
+    `}
+    style={{
+        background: color,
+    }}
+    >
+    <a href={url} class="decoration-none font-bold hover:bg-none">
+        { name }
+    </a>
+</div>

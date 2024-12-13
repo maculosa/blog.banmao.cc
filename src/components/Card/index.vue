@@ -23,10 +23,9 @@
 
   const width = computed(() => {
     if (props.width) {
-      return props.width + 'px'
-    } else {
-      return '100%'
-    }
+      return `${props.width}px`
+    } 
+    return '100%'
   })
 </script>
 

@@ -1,20 +1,30 @@
 ---
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
+import ToolPanel from '~/components/ToolPanel.astro'
+
+const tools = [
+    {
+        name: 'Bank 工具',
+        desc: 'Bank 工具',
+        url: '/tools/bankTool',
+        color: '#fbbf24'
+    },
+    {
+        name: 'ICO 图标转换工具',
+        desc: 'ICO 图标转换工具',
+        url: 'https://ico.nyaasu.top/',
+        color: '#4ade80'
+    },
+
+]
 ---
 
 <LayoutDefault>
     <div class="w-full grid grid-cols-3 gap-4">
-        <div
-            class="w-full h-100px flex place-content-center place-items-center bg-amber rounded-lg hover:shadow-2xl hover:shadow-cyan-400">
-            <a href="/tools/bankTool">
-                Bank 工具
-            </a>
-        </div>
-        <div
-            class="w-full h-100px bg-amber rounded-lg hover:shadow-2xl hover:shadow-cyan-400">
-        </div>
-        <div
-            class="w-full h-100px bg-amber rounded-lg hover:shadow-2xl hover:shadow-cyan-400">
-        </div>
+        {
+            tools.map(tool => {
+                return <ToolPanel name={tool.name} url={tool.url} color={tool.color} />
+            })
+        }
     </div>
 </LayoutDefault>
