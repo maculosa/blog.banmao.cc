@@ -4,7 +4,7 @@ import consola from 'consola';
 import { execSync } from 'child_process';
 
 /**
- * Get the current date in the format "YYYY-MM-DD".
+ * Get the current date in the format "YYYY-MM-DD HH:mm:ss".
  * @returns The current date as a string.
  */
 function getDate(): string {
@@ -12,7 +12,10 @@ function getDate(): string {
   let year: number = today.getFullYear();
   let month: string = String(today.getMonth() + 1).padStart(2, '0');
   let day: string = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  let hour: string = String(today.getHours()).padStart(2, '0');
+  let minute: string = String(today.getMinutes()).padStart(2, '0');
+  let second: string = String(today.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
 /**

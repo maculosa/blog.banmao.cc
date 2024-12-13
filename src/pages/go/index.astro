@@ -1,0 +1,23 @@
+---
+import Post from "~/components/Post.astro";
+import LayoutDefault from "~/layouts/LayoutDefault.astro";
+import { getPosts, getPostDescription } from "~/utils";
+
+const posts = (await getPosts()).filter(post => {
+    return post.data.categories && post.data.categories.includes('go')
+})
+
+---
+
+<LayoutDefault>
+    <h1 class="text-24px font-bold mb-6">Go 学习笔记系列教程</h1>
+    <section contain-layout un-flex="~ col gap-7.5">
+        {
+          posts.map((post) => (
+            <Post post={post}>
+              <p class="line-clamp-4">{getPostDescription(post)}</p>
+            </Post>
+          ))
+        }
+      </section>
+</LayoutDefault>
