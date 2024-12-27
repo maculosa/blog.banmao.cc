@@ -3,6 +3,7 @@
   pubDate: 2024-12-27 16:35:19
   categories: ['vite', 'Component', 'Component Library']
   description: '使用 vite 快速创建组件库'
+  draft: true
   ---
 
 如果你正在管理多个 React 应用程序并且希望用户界面保持一致性，迟早你会发现自己需要一套组件库。
