@@ -1,9 +1,9 @@
 ---
-  title: 什么是 .nvmrc 
-  pubDate: 2024-12-27 11:49:57
-  categories: [nvm, nvmrc, node]
-  description: ''
-  ---
+title: 什么是 .nvmrc 
+pubDate: 2024-12-27 11:49:57
+categories: [nvm, nvmrc, node]
+description: ''
+---
 
 当开发多个项目时，每个项目运行环境要求的 node 版本不一样，那么我们就需要给每个项目指定 node 版本，也就是通过终端执行 nvm install 和 nvm use 命令去安装并切换版本。
 
