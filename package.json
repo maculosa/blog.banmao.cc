@@ -44,7 +44,7 @@
     "changelogen": "^0.5.7",
     "consola": "^3.4.0",
     "esno": "^4.8.0",
-    "lint-staged": "^15.4.2",
+    "lint-staged": "^15.4.3",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.14.0",
     "unocss": "^65.4.3"
