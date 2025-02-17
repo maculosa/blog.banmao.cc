@@ -40,7 +40,7 @@
     "@unocss/preset-icons": "^65.4.3",
     "@unocss/reset": "^65.4.3",
     "@unocss/transformer-directives": "^65.4.3",
-    "bumpp": "^9.10.2",
+    "bumpp": "^10.0.3",
     "changelogen": "^0.5.7",
     "consola": "^3.4.0",
     "esno": "^4.8.0",
