@@ -1,0 +1,41 @@
+---
+import LayoutDefault from "~/layouts/LayoutDefault.astro"
+
+const projects = [
+    {
+        name: 'ProComponent',
+        desc: 'ProComponent for Naive UI',
+        url: 'https://procomponent.banmao.cc',
+        color: '#4ade80',
+        state: 'active'
+    },
+    {
+        name: 'mo19',
+        desc: 'mo19',
+        url: 'https://mo19.banmao.cc',
+        color: '#f43f5e',
+        state: 'start'
+    }
+]
+
+---
+
+<LayoutDefault>
+  <div class="w-full flex gap-4 flex-wrap">
+    <ul class="w-full">
+        {
+        projects.map(project => (
+            <li class="bg-gray-100 p-4 rounded-lg mb-2">
+                <div class="flex flex-col">
+
+                <a href={project.url} target="_blank" class="text-cyan decoration-none">
+                    <storng class="text-20px font-bold">{project.name}</storng>
+                </a>
+                <span class="text-16px ">{project.desc}</span>
+                </div>
+            </li>
+        ))
+        }
+    </ul>
+  </div>
+</LayoutDefault>
