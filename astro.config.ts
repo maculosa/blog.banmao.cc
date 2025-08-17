@@ -7,6 +7,8 @@ import mdx from '@astrojs/mdx'
 // import icon from 'astro-icon'
 import vue from '@astrojs/vue'
 
+import react from '@astrojs/react';
+
 // https://astro.build/config
 export default defineConfig({
     site: THEME_CONFIG.website,
@@ -18,14 +20,8 @@ export default defineConfig({
             wrap: true,
         },
     },
-    integrations: [
-        UnoCSS({
-            injectReset: true,
-        }),
-        robotsTxt(),
-        sitemap(),
-        mdx(),
-        // icon(),
-        vue(),
-    ],
+    integrations: [UnoCSS({
+        injectReset: true,
+    }), robotsTxt(), sitemap(), mdx(), // icon(),
+    vue(), react()],
 })

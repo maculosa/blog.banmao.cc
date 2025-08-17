@@ -12,6 +12,7 @@
       "esnext",
       "dom"
     ],
-    "jsx": "preserve"
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
