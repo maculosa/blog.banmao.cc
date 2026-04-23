@@ -3,7 +3,7 @@ import { formatDate, getPathFromCategory } from '~/utils'
 import { THEME_CONFIG } from '~/theme.config'
 interface Props {
   post: Post
-  collection: string
+  collection?: string
 }
 
 const { post, collection = "posts" } = Astro.props
