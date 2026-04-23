@@ -1,4 +1,4 @@
-export const THEME_CONFIG: App.Locals['config'] = {
+export const THEME_CONFIG: App.Locals["config"] = {
   /** blog title */
   title: "斑猫",
   /** your name */
@@ -28,7 +28,7 @@ export const THEME_CONFIG: App.Locals['config'] = {
     {
       name: "instagram",
       href: "https://instagram.com/maculosa",
-    }
+    },
   ],
   /** your header info */
   header: {
@@ -41,8 +41,8 @@ export const THEME_CONFIG: App.Locals['config'] = {
       href: "/posts/page/1",
     },
     {
-      name: 'Go',
-      href: "/go"
+      name: "Go",
+      href: "/go",
     },
     {
       name: "Archive",
@@ -50,19 +50,23 @@ export const THEME_CONFIG: App.Locals['config'] = {
     },
     {
       name: "Categories",
-      href: "/categories"
+      href: "/categories",
+    },
+    {
+      name: "GPUI",
+      href: "/gpui",
     },
     {
       name: "树莓派",
-      href: "/posts/raspberrypi"
+      href: "/raspberrypi",
     },
     {
       name: "项目",
-      href: "/projects"
+      href: "/projects",
     },
     {
-      name: '工具',
-      href: "/tools"
+      name: "工具",
+      href: "/tools",
     },
     {
       name: "About",
@@ -118,6 +122,5 @@ export const THEME_CONFIG: App.Locals['config'] = {
     // twikoo: {
     //   envId: "https://twikoo-tau-flame.vercel.app",
     // }
-  }
-}
-
+  },
+};
