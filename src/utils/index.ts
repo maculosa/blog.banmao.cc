@@ -25,7 +25,6 @@ export async function getPosts(collection: 'posts' | 'go' | 'gpui' | 'raspberryp
     collection,
     ({ data }) => data.draft !== true
   );
-  console.log("post: ", posts);
   posts.sort((a, b) => {
     const aDate = a.data.pubDate || new Date();
     const bDate = b.data.pubDate || new Date();
