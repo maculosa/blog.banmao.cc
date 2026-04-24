@@ -27,7 +27,8 @@ const image =
     src: props.banner,
     format: "jpeg"
   }))
-const optimizedImage = new URL(image?.src??"/placeholder.png", Astro.url).toString()
+const imageSrc = image?.src || "/placeholder.png"
+const optimizedImage = new URL(imageSrc, Astro.url).toString()
 
 const localLang = Astro.locals.config.locale ?? "en"
 ---
