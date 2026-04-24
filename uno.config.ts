@@ -12,7 +12,7 @@ const {socials, themeStyle} = THEME_CONFIG;
 let foreground = "#2e405b";
 let background = "#ffffff";
 
-if(THEME_CONFIG.themeStyle === 'dark') {
+if (THEME_CONFIG.themeStyle === 'dark') {
   foreground = "#ffffff";
   background = "#2e405b";
 }
