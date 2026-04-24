@@ -63,6 +63,41 @@ nav ul:last-child li a:hover {
   transition: transform 0.3s ease;
 }
 
+/* 主题切换按钮悬停样式 */
+#theme-toggle:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* 深色主题样式 */
+.dark {
+  color-scheme: dark;
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+}
+
+.dark a {
+  color: #93c5fd;
+}
+
+.dark a:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.dark .bg-foreground {
+  background-color: #e5e5e5;
+  color: #1a1a1a;
+}
+
+.dark .b-l-foreground-solid {
+  border-left-color: #e5e5e5;
+}
+
+.dark .color-background {
+  color: #1a1a1a;
+}
+
 article.heti a:hover {
   padding-block-end: 0px;
   border-block-end: 1px solid rgba(0, 0, 0, 0);
