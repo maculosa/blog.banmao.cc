@@ -72,15 +72,23 @@ nav ul:last-child li a:hover {
 /* 深色主题样式 */
 .dark {
   color-scheme: dark;
-  background-color: #1a1a1a;
   color: #e5e5e5;
 }
 
-.dark a {
+html.dark body,
+body.dark {
+  background-color: #1a1a1a;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  color: #e5e5e5;
+}
+
+html.dark body a,
+body.dark a {
   color: #93c5fd;
 }
 
-.dark a:hover {
+html.dark body a:hover,
+body.dark a:hover {
   color: #60a5fa;
   text-decoration: underline;
 }
@@ -96,6 +104,36 @@ nav ul:last-child li a:hover {
 
 .dark .color-background {
   color: #1a1a1a;
+}
+
+/* 暗色主题下链接样式 */
+html.dark body article.heti a,
+body.dark article.heti a {
+  color: #93c5fd;
+}
+
+html.dark body article.heti a:hover,
+body.dark article.heti a:hover {
+  color: #60a5fa;
+}
+
+/* 暗色主题下代码样式 */
+html.dark body article.heti code,
+body.dark article.heti code {
+  color: #f9f2f4;
+  background-color: #c7254e;
+}
+
+html.dark body article.heti a code,
+body.dark article.heti a code {
+  color: #f9f2f4;
+  background-color: #c7254e;
+}
+
+/* 暗色主题下引用样式 */
+html.dark body article.heti blockquote,
+body.dark article.heti blockquote {
+  border-left-color: #555;
 }
 
 /* 页面过渡动画 */
@@ -162,4 +200,283 @@ article.heti blockquote {
 article.heti blockquote p {
   margin-block-start: 12px;
   margin-block-end: 12px;
+}
+
+/* 响应式工具类 */
+@media (max-width: 640px) {
+  .sm\:hidden {
+    display: none;
+  }
+  
+  .sm\:block {
+    display: block;
+  }
+  
+  .sm\:flex {
+    display: flex;
+  }
+  
+  .sm\:text-base {
+    font-size: 1rem;
+  }
+  
+  .sm\:text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .sm\:text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .sm\:p-2 {
+    padding: 0.5rem;
+  }
+  
+  .sm\:p-3 {
+    padding: 0.75rem;
+  }
+  
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+  
+  .sm\:gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .sm\:gap-4 {
+    gap: 1rem;
+  }
+  
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+  
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+  
+  .sm\:items-center {
+    align-items: center;
+  }
+  
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+  
+  .sm\:line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .sm\:line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .md\:hidden {
+    display: none;
+  }
+  
+  .md\:block {
+    display: block;
+  }
+  
+  .md\:flex {
+    display: flex;
+  }
+  
+  .md\:text-base {
+    font-size: 1rem;
+  }
+  
+  .md\:text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .md\:text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .md\:text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .md\:p-3 {
+    padding: 0.75rem;
+  }
+  
+  .md\:p-4 {
+    padding: 1rem;
+  }
+  
+  .md\:p-6 {
+    padding: 1.5rem;
+  }
+  
+  .md\:gap-4 {
+    gap: 1rem;
+  }
+  
+  .md\:gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .md\:flex-col {
+    flex-direction: column;
+  }
+  
+  .md\:flex-row {
+    flex-direction: row;
+  }
+  
+  .md\:items-center {
+    align-items: center;
+  }
+  
+  .md\:justify-between {
+    justify-content: space-between;
+  }
+  
+  .md\:line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .md\:line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .md\:line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1025px) {
+  .lg\:hidden {
+    display: none;
+  }
+  
+  .lg\:block {
+    display: block;
+  }
+  
+  .lg\:flex {
+    display: flex;
+  }
+  
+  .lg\:text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .lg\:text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  .lg\:text-4xl {
+    font-size: 2.25rem;
+  }
+  
+  .lg\:p-4 {
+    padding: 1rem;
+  }
+  
+  .lg\:p-6 {
+    padding: 1.5rem;
+  }
+  
+  .lg\:p-7\.5 {
+    padding: 1.875rem;
+  }
+  
+  .lg\:gap-4 {
+    gap: 1rem;
+  }
+  
+  .lg\:gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .lg\:gap-7\.5 {
+    gap: 1.875rem;
+  }
+  
+  .lg\:flex-col {
+    flex-direction: column;
+  }
+  
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+  
+  .lg\:items-center {
+    align-items: center;
+  }
+  
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+  
+  .lg\:line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* 触摸友好 */
+@media (hover: none) and (pointer: coarse) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  #nav-toggle {
+    min-height: 48px;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* 减少动画效果 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  body {
+    text-shadow: none;
+  }
+  
+  a {
+    text-decoration-thickness: 3px;
+  }
 }

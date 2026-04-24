@@ -24,30 +24,32 @@ const { translate: t } = Astro.locals
   </hgroup>
 
   <nav class="text-center font-bold" un-flex="~ col gap-2">
-    <!-- 移动端导航菜单 -->
-    <div class="lg:hidden mb-2">
+    {/* 移动端导航菜单 */}
+    <div class="lg:hidden w-full">
       <button 
         id="nav-toggle" 
         aria-label="切换导航菜单"
-        class="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        aria-expanded="false"
+        class="w-full p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
       >
-        <span class="icon i-mdi-menu"></span>
+        <span class="icon i-mdi-menu text-xl"></span>
+        <span>菜单</span>
       </button>
-      <ul id="mobile-nav" role="navigation" aria-label="主导航" class="hidden mt-2 space-y-2">
+      <ul id="mobile-nav" role="navigation" aria-label="主导航" class="hidden mt-2 space-y-1 bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
         {
           navs.map((nav) => (
             <li>
-              <a href={nav.href} aria-label={t(nav.name)} class="block py-1">{t(nav.name)}</a>
+              <a href={nav.href} aria-label={t(nav.name)} class="block py-3 px-4 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-left">{t(nav.name)}</a>
             </li>
           ))
         }
         <li>
-          <a href="/search" aria-label="搜索" class="block py-1">搜索</a>
+          <a href="/search" aria-label="搜索" class="block py-3 px-4 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-left">搜索</a>
         </li>
       </ul>
     </div>
     
-    <!-- 桌面端导航菜单 -->
+    {/* 桌面端导航菜单 */}
     <ul role="navigation" aria-label="主导航" class="hidden lg:flex lg:flex-col lg:items-start lg:text-4 text-3.5 justify-center">
       {
         navs.map((nav) => (
@@ -65,7 +67,7 @@ const { translate: t } = Astro.locals
       {
         socials.map((soc) => (
           <li>
-            <a href={soc.href} target="_blank" title={soc.name} aria-label={soc.name} class={`icon i-mdi-${soc.name}`} />
+            <a href={soc.href} target="_blank" title={soc.name} aria-label={soc.name} class={`icon i-mdi-${soc.name} text-lg`} />
           </li>
         ))
       }
@@ -74,7 +76,7 @@ const { translate: t } = Astro.locals
           id="theme-toggle" 
           title="切换主题" 
           aria-label="切换主题" 
-          class="icon i-mdi-theme-light-dark cursor-pointer"
+          class="icon i-mdi-theme-light-dark cursor-pointer text-lg"
           tabindex="0"
         />
       </li>
@@ -88,7 +90,9 @@ const { translate: t } = Astro.locals
     
     if (navToggle && mobileNav) {
       navToggle.addEventListener('click', () => {
+        const isExpanded = !mobileNav.classList.contains('hidden');
         mobileNav.classList.toggle('hidden');
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
       });
     }
   </script>

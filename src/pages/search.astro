@@ -24,9 +24,9 @@ if (searchQuery) {
 ---
 
 <LayoutDefault title="搜索结果" desc="搜索文章">
-  <div class="mb-8">
-    <h1 class="text-6 font-bold mb-4">搜索结果</h1>
-    <div class="flex gap-2">
+  <div class="mb-6 md:mb-8">
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">搜索结果</h1>
+    <div class="flex flex-col sm:flex-row gap-2">
       <form action="/search" method="get" class="flex w-full" aria-label="搜索表单">
         <input 
           type="text" 
@@ -35,14 +35,14 @@ if (searchQuery) {
           value={searchQuery}
           aria-label="搜索关键词"
           aria-describedby="search-results"
-          class="flex-1 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="flex-1 p-3 md:p-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
         />
         <button 
           type="submit" 
           aria-label="执行搜索"
-          class="p-3 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition-colors"
+          class="p-3 md:p-4 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition-colors"
         >
-          <span class="icon i-mdi-magnify"></span>
+          <span class="icon i-mdi-magnify text-lg md:text-xl"></span>
           <span class="sr-only">搜索</span>
         </button>
       </form>
@@ -51,7 +51,7 @@ if (searchQuery) {
 
   {searchQuery ? (
     <div id="search-results">
-      <p class="mb-4">找到 {filteredPosts.length} 篇相关文章</p>
+      <p class="mb-4 text-sm md:text-base">找到 {filteredPosts.length} 篇相关文章</p>
       {filteredPosts.length > 0 ? (
         <ListSection>
           {filteredPosts.map(post => (
@@ -63,10 +63,10 @@ if (searchQuery) {
           ))}
         </ListSection>
       ) : (
-        <p>没有找到相关文章</p>
+        <p class="text-gray-500 dark:text-gray-400">没有找到相关文章</p>
       )}
     </div>
   ) : (
-    <p>请在搜索框中输入关键词</p>
+    <p class="text-gray-500 dark:text-gray-400">请在搜索框中输入关键词</p>
   )}
 </LayoutDefault>

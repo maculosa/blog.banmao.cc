@@ -11,11 +11,11 @@ const { translate: t } = Astro.locals
 ---
 
 <LayoutDefault>
-  <section contain-layout un-flex="~ col gap-7.5">
+  <section contain-layout un-flex="~ col gap-6 md:gap-7.5 lg:gap-7.5">
     {
       posts.map((post) => (
         <Post post={post}>
-          <p class="line-clamp-4">{getPostDescription(post)}</p>
+          <p class="line-clamp-2 sm:line-clamp-3 md:line-clamp-4">{getPostDescription(post)}</p>
         </Post>
       ))
     }

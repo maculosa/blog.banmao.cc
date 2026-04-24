@@ -7,9 +7,9 @@ interface Props {
 const { href, title, description } = Astro.props
 ---
 
-<li un-flex="~ col gap-1 items-start">
-  <h3 class="post-title!">
-    <a href={href}>{title}</a>
+<li un-flex="~ col gap-1 items-start" class="py-2">
+  <h3 class="post-title! text-base md:text-lg lg:text-xl">
+    <a href={href} class="hover:underline">{title}</a>
   </h3>
-  <p>{description}</p>
+  <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">{description}</p>
 </li>

@@ -21,24 +21,24 @@ const { showLeft = true, showRight = true, leftTitle, rightTitle, leftUrl, right
 <footer class="mt-5">
   {
     showPageCount && (
-      <p class="mb-2.5">
+      <p class="mb-2.5 text-xs md:text-sm">
         {t('page_number', currentPage)} / {t('page_count', totalPage)}
       </p>
     )
   }
-  <p class="flex items-center gap-2">
+  <p class="flex flex-col sm:flex-row items-center gap-2 text-sm md:text-base">
     {
       showLeft && (
         <span class="inline-flex items-center">
           <i class="i-mdi-chevron-double-left icon" />
-          <a href={leftUrl}>{leftTitle}</a>
+          <a href={leftUrl} class="hover:underline">{leftTitle}</a>
         </span>
       )
     }
     {
       showRight && (
         <span class="inline-flex items-center">
-          <a href={rightUrl}>{rightTitle}</a>
+          <a href={rightUrl} class="hover:underline">{rightTitle}</a>
           <i class="i-mdi-chevron-double-right icon" />
         </span>
       )
