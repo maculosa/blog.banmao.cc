@@ -117,22 +117,43 @@ const searchQuery = Astro.url.searchParams.get('q') || ''
       }
 
       searchNoResults.classList.add('hidden');
-      searchList.innerHTML = '<section un-flex="~ col gap-4 md:gap-6"><ul class="ml-0 md:ml-6" un-flex="~ col gap-2 md:gap-4">' +
-        results.map(item => `
-          <li un-flex="~ col gap-1 items-start" class="py-2">
-            <h3 class="post-title! text-base md:text-lg lg:text-xl">
-              <a href="${item.url}" class="hover:underline">${escapeHtml(item.title)}</a>
-            </h3>
-            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">${escapeHtml(item.description || '')}</p>
-          </li>
-        `).join('') +
-        '</ul></section>';
-    }
 
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+      const section = document.createElement('section');
+      section.setAttribute('un-flex', '~ col gap-4 md:gap-6');
+
+      const ul = document.createElement('ul');
+      ul.setAttribute('class', 'ml-0 md:ml-6');
+      ul.setAttribute('un-flex', '~ col gap-2 md:gap-4');
+
+      results.forEach(item => {
+        const li = document.createElement('li');
+        li.setAttribute('class', 'py-2');
+        li.setAttribute('un-flex', '~ col gap-1 items-start');
+
+        const h3 = document.createElement('h3');
+        h3.setAttribute('class', 'post-title! text-base md:text-lg lg:text-xl');
+
+        const link = document.createElement('a');
+        link.href = item.url;
+        link.textContent = item.title;
+        link.className = 'hover:underline';
+
+        h3.appendChild(link);
+        li.appendChild(h3);
+
+        if (item.description) {
+          const p = document.createElement('p');
+          p.setAttribute('class', 'text-xs md:text-sm text-gray-600 dark:text-gray-400');
+          p.textContent = item.description;
+          li.appendChild(p);
+        }
+
+        ul.appendChild(li);
+      });
+
+      section.appendChild(ul);
+      searchList.innerHTML = '';
+      searchList.appendChild(section);
     }
 
     searchInput.addEventListener('input', (e) => {
