@@ -1,7 +1,5 @@
 ---
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import ListSection from '~/components/ListSection.astro'
-import ListItem from '~/components/ListItem.astro'
 import { getPosts } from '~/utils'
 import { collections } from '~/content/config'
 import type { Post } from '~/types'
@@ -10,93 +8,174 @@ interface SearchResult {
   post: Post
   collection: string
   url: string
+  title: string
+  description: string
 }
-
-const searchQuery = Astro.url.searchParams.get('q') || ''
 
 const collectionKeys = Object.keys(collections) as Array<keyof typeof collections>
 
-let searchResults: SearchResult[] = []
+const allPosts: SearchResult[] = []
 
-if (searchQuery) {
-  const query = searchQuery.toLowerCase()
-
-  for (const collectionName of collectionKeys) {
-    const posts = await getPosts(collectionName)
-    const filtered = posts.filter(post => {
-      const title = post.data.title?.toLowerCase() || ''
-      const description = post.data.description?.toLowerCase() || ''
-      const content = post.body?.toLowerCase() || ''
-      return title.includes(query) || description.includes(query) || content.includes(query)
+for (const collectionName of collectionKeys) {
+  const posts = await getPosts(collectionName)
+  posts.forEach(post => {
+    allPosts.push({
+      post,
+      collection: collectionName,
+      url: `/${collectionName}/${post.slug}/`,
+      title: post.data.title || '',
+      description: post.data.description || ''
     })
-
-    filtered.forEach(post => {
-      const url = `/${collectionName}/${post.slug}/`
-      searchResults.push({ post, collection: collectionName, url })
-    })
-  }
+  })
 }
+
+const searchQuery = Astro.url.searchParams.get('q') || ''
 // const { translate: t } = Astro.locals
 ---
 
-<LayoutDefault title="搜索结果" desc="搜索文章">
+<LayoutDefault title="搜索" desc="搜索文章">
   <div class="mb-6 md:mb-8">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">搜索</h1>
     <div class="flex flex-col sm:flex-row gap-2">
-      <form id="search-form" action="/search" method="get" class="flex w-full" aria-label="搜索表单">
+      <div class="flex w-full">
         <input 
           id="search-input"
           type="text" 
-          name="q" 
-          placeholder="按 Command+K 或 Ctrl+K 打开搜索..." 
+          placeholder="输入关键词搜索..." 
           value={searchQuery}
           aria-label="搜索关键词"
           aria-describedby="search-results"
           class="flex-1 p-3 md:p-4 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
         <button 
-          type="submit" 
+          id="search-clear"
+          type="button"
+          aria-label="清除搜索"
+          class="p-3 md:p-4 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors hidden"
+        >
+          <span class="icon i-mdi-close text-lg md:text-xl"></span>
+        </button>
+        <button 
+          id="search-btn"
+          type="button"
           aria-label="执行搜索"
           class="p-3 md:p-4 bg-blue-500 hover:bg-blue-600 text-white rounded-r-md transition-colors"
         >
           <span class="icon i-mdi-magnify text-lg md:text-xl"></span>
-          <span class="sr-only">搜索</span>
         </button>
-      </form>
+      </div>
     </div>
     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
       提示：按 <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">⌘</kbd> + <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">K</kbd> 可快速打开搜索
     </p>
   </div>
 
-  {searchQuery ? (
-    <div id="search-results">
-      <p class="mb-4 text-sm md:text-base">找到 {searchResults.length} 篇相关文章</p>
-      {searchResults.length > 0 ? (
-        <ListSection>
-          {searchResults.map(result => (
-            <ListItem 
-              href={result.url} 
-              title={result.post.data.title} 
-              description={result.post.data.description} 
-            />
-          ))}
-        </ListSection>
-      ) : (
-        <p class="text-gray-500 dark:text-gray-400">没有找到相关文章，请尝试其他关键词</p>
-      )}
-    </div>
-  ) : (
-    <p class="text-gray-500 dark:text-gray-400">请在搜索框中输入关键词开始搜索</p>
-  )}
-  
-  <script is:inline>
-    // 页面加载时自动聚焦搜索框
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('search-input');
-      if (searchInput && !searchInput.value) {
-        searchInput.focus();
+  <div id="search-results">
+    <p id="search-count" class="mb-4 text-sm md:text-base"></p>
+    <div id="search-list"></div>
+    <p id="search-empty" class="text-gray-500 dark:text-gray-400 hidden">请在搜索框中输入关键词开始搜索</p>
+    <p id="search-no-results" class="text-gray-500 dark:text-gray-400 hidden">没有找到相关文章，请尝试其他关键词</p>
+  </div>
+
+  <script is:inline define:vars={{ allPosts, initialQuery: searchQuery }}>
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    const searchClear = document.getElementById('search-clear');
+    const searchCount = document.getElementById('search-count');
+    const searchList = document.getElementById('search-list');
+    const searchEmpty = document.getElementById('search-empty');
+    const searchNoResults = document.getElementById('search-no-results');
+
+    function performSearch(query) {
+      query = query.toLowerCase().trim();
+
+      if (!query) {
+        searchCount.textContent = '';
+        searchList.innerHTML = '';
+        searchEmpty.classList.remove('hidden');
+        searchNoResults.classList.add('hidden');
+        searchClear.classList.add('hidden');
+        return;
+      }
+
+      searchEmpty.classList.add('hidden');
+      searchClear.classList.remove('hidden');
+
+      const results = allPosts.filter(item => {
+        const title = (item.title || '').toLowerCase();
+        const description = (item.description || '').toLowerCase();
+        const content = (item.post.body || '').toLowerCase();
+        return title.includes(query) || description.includes(query) || content.includes(query);
+      });
+
+      searchCount.textContent = `找到 ${results.length} 篇相关文章`;
+
+      if (results.length === 0) {
+        searchList.innerHTML = '';
+        searchNoResults.classList.remove('hidden');
+        return;
+      }
+
+      searchNoResults.classList.add('hidden');
+      searchList.innerHTML = '<section un-flex="~ col gap-4 md:gap-6"><ul class="ml-0 md:ml-6" un-flex="~ col gap-2 md:gap-4">' +
+        results.map(item => `
+          <li un-flex="~ col gap-1 items-start" class="py-2">
+            <h3 class="post-title! text-base md:text-lg lg:text-xl">
+              <a href="${item.url}" class="hover:underline">${escapeHtml(item.title)}</a>
+            </h3>
+            <p class="text-xs md:text-sm text-gray-600 dark:text-gray-400">${escapeHtml(item.description || '')}</p>
+          </li>
+        `).join('') +
+        '</ul></section>';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      performSearch(e.target.value);
+      updateUrl(e.target.value);
+    });
+
+    searchBtn.addEventListener('click', () => {
+      performSearch(searchInput.value);
+      updateUrl(searchInput.value);
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      performSearch('');
+      updateUrl('');
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch(searchInput.value);
+        updateUrl(searchInput.value);
       }
     });
+
+    function updateUrl(query) {
+      const url = new URL(window.location.href);
+      if (query) {
+        url.searchParams.set('q', query);
+      } else {
+        url.searchParams.delete('q');
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    if (initialQuery) {
+      searchInput.value = initialQuery;
+      performSearch(initialQuery);
+    } else {
+      searchEmpty.classList.remove('hidden');
+      searchInput.focus();
+    }
   </script>
 </LayoutDefault>
