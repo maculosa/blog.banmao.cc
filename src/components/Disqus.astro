@@ -5,7 +5,6 @@ interface Props {
   title: string
 }
 
-const { identifier, url, title } = Astro.props
 const { comments } = Astro.locals.config
 
 if(!comments || !comments.disqus) {
@@ -17,19 +16,13 @@ const shortname = comments.disqus.shortname
 
 <div id="disqus_thread"></div>
 
-<script is:inline define:vars={{ shortname, identifier, url, title }}>
-  // var disqus_config = function () {
-  //   this.page.url = url
-  //   this.page.identifier = identifier
-  //   this.page.title = title
-  // }
-
-  ;(function () {
+<script is:inline define:vars={{ shortname }}>
+;(function () {
     var d = document,
-      s = d.createElement('script')
-    s.src = 'https://' + shortname + '.disqus.com/embed.js'
-    s.setAttribute('data-timestamp', new Date().toString())
-    ;(d.head || d.body).appendChild(s)
-  })()
+        s = d.createElement('script');
+    s.src = 'https://' + shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', new Date().toString());
+    (d.head || d.body).appendChild(s);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

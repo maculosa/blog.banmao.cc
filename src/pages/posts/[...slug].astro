@@ -47,33 +47,33 @@ function getUrl(slug: string) {
 </LayoutDefault>
 
 <script>
-  import '@github/clipboard-copy-element'
+  import '@github/clipboard-copy-element';
 
   document.addEventListener('clipboard-copy', function (event) {
-    const target = event.target as HTMLElement
-    const icon = target.querySelector('.icon') as HTMLElement
-    icon.classList.replace('i-mdi-content-copy', 'i-mdi-check')
-    setTimeout(() => {
-      icon.classList.replace('i-mdi-check', 'i-mdi-content-copy')
-    }, 1500)
-  })
+      const target = event.target as HTMLElement;
+      const icon = target.querySelector('.icon') as HTMLElement;
+      icon.classList.replace('i-mdi-content-copy', 'i-mdi-check');
+      setTimeout(() => {
+          icon.classList.replace('i-mdi-check', 'i-mdi-content-copy');
+      }, 1500);
+  });
 
-  const codeBlocks = Array.from(document.querySelectorAll('pre'))
-  const icon = "<div class='i-mdi-content-copy icon text-white'></div>"
+  const codeBlocks = Array.from(document.querySelectorAll('pre'));
+  const icon = '<div class=\'i-mdi-content-copy icon text-white\'></div>';
   for (let codeBlock of codeBlocks) {
-    let wrapper = document.createElement('div')
-    wrapper.className = 'code-container'
+      let wrapper = document.createElement('div');
+      wrapper.className = 'code-container';
 
-    let copyButton = document.createElement('clipboard-copy')
-    let code = codeBlock.querySelector('code')
-    copyButton.value = code?.innerText ?? ''
-    copyButton.className = 'clipboard-copy'
-    copyButton.innerHTML = icon
+      let copyButton = document.createElement('clipboard-copy');
+      let code = codeBlock.querySelector('code');
+      copyButton.value = code?.innerText ?? '';
+      copyButton.className = 'clipboard-copy';
+      copyButton.innerHTML = icon;
 
-    codeBlock.appendChild(copyButton)
+      codeBlock.appendChild(copyButton);
 
-    codeBlock.parentNode?.insertBefore(wrapper, codeBlock)
-    wrapper.appendChild(codeBlock)
+      codeBlock.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
   }
 </script>
 

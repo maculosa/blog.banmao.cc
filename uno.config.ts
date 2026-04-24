@@ -54,7 +54,7 @@ export default defineConfig({
     transformerDirectives(),
   ],
   safelist: [
-    ...socials.map((social) => `i-mdi-${social.name}`),
+    ...socials.map((social: { name: string }) => `i-mdi-${social.name}`),
     'i-mdi-content-copy',
     'i-mdi-check',
   ],

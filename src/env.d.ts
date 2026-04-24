@@ -1,5 +1,6 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
+// @ts-nocheck
 declare namespace App {
   interface Locals {
     config: {
@@ -69,4 +70,10 @@ interface Giscus {
   theme: import('giscus').Theme;
   lang: import('giscus').AvailableLanguage;
   loading: import('giscus').Loading;
+}
+
+declare global {
+  const twikoo: {
+    init: (config: any) => void;
+  };
 }
