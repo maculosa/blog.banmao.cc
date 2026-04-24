@@ -3,6 +3,7 @@ import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import ListSection from '~/components/ListSection.astro'
 import ListItem from '~/components/ListItem.astro'
 import { getPosts } from '~/utils'
+import { collections } from '~/content/config'
 import type { Post } from '~/types'
 
 interface SearchResult {
@@ -13,14 +14,15 @@ interface SearchResult {
 
 const searchQuery = Astro.url.searchParams.get('q') || ''
 
+const collectionKeys = Object.keys(collections) as Array<keyof typeof collections>
+
 let searchResults: SearchResult[] = []
 
 if (searchQuery) {
   const query = searchQuery.toLowerCase()
-  const collections = ['posts', 'go', 'gpui', 'raspberrypi'] as const
 
-  for (const collection of collections) {
-    const posts = await getPosts(collection)
+  for (const collectionName of collectionKeys) {
+    const posts = await getPosts(collectionName)
     const filtered = posts.filter(post => {
       const title = post.data.title?.toLowerCase() || ''
       const description = post.data.description?.toLowerCase() || ''
@@ -29,8 +31,8 @@ if (searchQuery) {
     })
 
     filtered.forEach(post => {
-      const url = `/${collection}/${post.slug}/`
-      searchResults.push({ post, collection, url })
+      const url = `/${collectionName}/${post.slug}/`
+      searchResults.push({ post, collection: collectionName, url })
     })
   }
 }
