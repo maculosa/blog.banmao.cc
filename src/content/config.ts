@@ -7,7 +7,7 @@ const postSchema = ({ image }) => z.object({
   pubDate: z.coerce.date(),
   customData: z.string().optional(),
   banner: image()
-    .refine((img) => Math.max(img.width, img.height) <= 4096, {
+    .refine((img: { width: number; height: number }) => Math.max(img.width, img.height) <= 4096, {
       message: "Width and height of the banner must less than 4096 pixels"
     })
     .optional(),
