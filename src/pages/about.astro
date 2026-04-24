@@ -2,6 +2,133 @@
 import LayoutDefault from "~/layouts/LayoutDefault.astro"
 ---
 
-<LayoutDefault>
-  
+<LayoutDefault title="关于" desc="关于这个博客">
+  <section contain-layout un-flex="~ col gap-6 md:gap-8">
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">关于这个博客</h1>
+    
+    <div class="prose dark:prose-invert max-w-none">
+      <p>欢迎来到 <strong>斑猫</strong> 博客！这是一个记录技术心得、学习笔记和生活感悟的个人博客。</p>
+      
+      <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">博客定位</h2>
+      <p>本博客主要分享以下内容：</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>前端开发技术与实践</li>
+        <li>后端技术学习笔记</li>
+        <li>工具使用技巧</li>
+        <li>编程经验分享</li>
+        <li>其他技术相关内容</li>
+      </ul>
+      
+      <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">技术栈</h2>
+      <p>本博客使用以下技术构建：</p>
+      
+      <!-- 技术栈词图 -->
+      <div class="mt-6 mb-8">
+        <canvas id="techWordcloud" width="400" height="300"></canvas>
+      </div>
+      
+      <ul class="list-disc pl-6 space-y-2 mt-6">
+        <li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> - 现代化的静态网站生成器</li>
+        <li><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">Vue 3</a> - 用于交互式组件</li>
+        <li><a href="https://react.dev" target="_blank" rel="noopener noreferrer">React</a> - 用于交互式组件</li>
+        <li><a href="https://unocss.dev" target="_blank" rel="noopener noreferrer">UnoCSS</a> - 原子化 CSS 框架</li>
+        <li><a href="https://mdxjs.com" target="_blank" rel="noopener noreferrer">MDX</a> - Markdown 扩展格式</li>
+        <li><a href="https://www.typescriptlang.org" target="_blank" rel="noopener noreferrer">TypeScript</a> - 类型安全的 JavaScript 超集</li>
+        <li><a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">Vite</a> - 现代化的前端构建工具</li>
+        <li><a href="https://github.com/antfu/unocss" target="_blank" rel="noopener noreferrer">UnoCSS</a> - 原子化 CSS 框架</li>
+        <li><a href="https://www.w3.org/standards/webdesign/htmlcss" target="_blank" rel="noopener noreferrer">HTML5/CSS3</a> - 网页标准技术</li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a> - 编程语言</li>
+      </ul>
+      
+      <!-- 使用 CDN 版本的 Chart.js 和词图库 -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+          const canvas = document.getElementById('techWordcloud');
+          if (!canvas) return;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          
+          const techData = [
+            { text: 'Astro', value: 100 },
+            { text: 'Vue 3', value: 80 },
+            { text: 'React', value: 70 },
+            { text: 'TypeScript', value: 90 },
+            { text: 'Vite', value: 85 },
+            { text: 'UnoCSS', value: 75 },
+            { text: 'MDX', value: 65 },
+            { text: 'HTML5', value: 95 },
+            { text: 'CSS3', value: 95 },
+            { text: 'JavaScript', value: 90 },
+            { text: 'Responsive', value: 85 },
+            { text: 'SEO', value: 80 },
+            { text: 'Accessibility', value: 75 }
+          ];
+          
+          // @ts-ignore - Chart is available from CDN
+          new Chart(ctx, {
+            type: 'wordcloud',
+            data: {
+              datasets: [{
+                label: '技术栈',
+                data: techData,
+                backgroundColor: function(context) {
+                  // @ts-ignore
+                  const colors = [
+                    '#3b82f6', '#10b981', '#f59e0b', '#ef4444',
+                    '#8b5cf6', '#ec4899', '#14b8a6', '#84cc16',
+                    '#f97316', '#6366f1', '#d946ef', '#06b6d4'
+                  ];
+                  // @ts-ignore
+                  return colors[context.dataIndex % colors.length];
+                },
+                borderColor: '#ffffff',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      // @ts-ignore
+                      return context.raw.text;
+                    }
+                  }
+                }
+              },
+              layout: {
+                padding: 30
+              },
+              scales: {
+                x: {
+                  display: false
+                },
+                y: {
+                  display: false
+                }
+              }
+            }
+          });
+        });
+      </script>
+      
+      <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">关于作者</h2>
+      <p>我是一名热爱技术的开发者，热衷于学习和分享各种技术知识。希望通过这个博客，能够记录自己的学习历程，同时也能帮助到其他有需要的人。</p>
+      
+      <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">联系方式</h2>
+      <p>如果您有任何问题或建议，欢迎通过以下方式联系我：</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>GitHub: <a href="https://github.com/maculosa" target="_blank" rel="noopener noreferrer">Maculosa</a></li>
+        <li>Email: contact@banmao.cc</li>
+      </ul>
+      
+      <h2 class="text-xl md:text-2xl font-bold mt-8 mb-4">更新频率</h2>
+      <p>博客会不定期更新，主要根据学习进度和项目经验进行分享。</p>
+      
+      <p class="mt-8 text-gray-600 dark:text-gray-400">© 2026 斑猫博客</p>
+    </div>
+  </section>
 </LayoutDefault>
