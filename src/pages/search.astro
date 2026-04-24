@@ -5,68 +5,96 @@ import ListItem from '~/components/ListItem.astro'
 import { getPosts } from '~/utils'
 import type { Post } from '~/types'
 
-const posts = await getPosts()
+interface SearchResult {
+  post: Post
+  collection: string
+  url: string
+}
+
 const searchQuery = Astro.url.searchParams.get('q') || ''
 
-let filteredPosts: Post[] = []
+let searchResults: SearchResult[] = []
 
 if (searchQuery) {
   const query = searchQuery.toLowerCase()
-  filteredPosts = posts.filter(post => {
-    const title = post.data.title?.toLowerCase() || ''
-    const description = post.data.description?.toLowerCase() || ''
-    const content = post.body?.toLowerCase() || ''
-    return title.includes(query) || description.includes(query) || content.includes(query)
-  })
-}
+  const collections = ['posts', 'go', 'gpui', 'raspberrypi'] as const
 
+  for (const collection of collections) {
+    const posts = await getPosts(collection)
+    const filtered = posts.filter(post => {
+      const title = post.data.title?.toLowerCase() || ''
+      const description = post.data.description?.toLowerCase() || ''
+      const content = post.body?.toLowerCase() || ''
+      return title.includes(query) || description.includes(query) || content.includes(query)
+    })
+
+    filtered.forEach(post => {
+      const url = `/${collection}/${post.slug}/`
+      searchResults.push({ post, collection, url })
+    })
+  }
+}
 // const { translate: t } = Astro.locals
 ---
 
 <LayoutDefault title="搜索结果" desc="搜索文章">
   <div class="mb-6 md:mb-8">
-    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">搜索结果</h1>
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">搜索</h1>
     <div class="flex flex-col sm:flex-row gap-2">
-      <form action="/search" method="get" class="flex w-full" aria-label="搜索表单">
+      <form id="search-form" action="/search" method="get" class="flex w-full" aria-label="搜索表单">
         <input 
+          id="search-input"
           type="text" 
           name="q" 
-          placeholder="搜索文章..." 
+          placeholder="按 Command+K 或 Ctrl+K 打开搜索..." 
           value={searchQuery}
           aria-label="搜索关键词"
           aria-describedby="search-results"
-          class="flex-1 p-3 md:p-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+          class="flex-1 p-3 md:p-4 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
         <button 
           type="submit" 
           aria-label="执行搜索"
-          class="p-3 md:p-4 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition-colors"
+          class="p-3 md:p-4 bg-blue-500 hover:bg-blue-600 text-white rounded-r-md transition-colors"
         >
           <span class="icon i-mdi-magnify text-lg md:text-xl"></span>
           <span class="sr-only">搜索</span>
         </button>
       </form>
     </div>
+    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+      提示：按 <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">⌘</kbd> + <kbd class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">K</kbd> 可快速打开搜索
+    </p>
   </div>
 
   {searchQuery ? (
     <div id="search-results">
-      <p class="mb-4 text-sm md:text-base">找到 {filteredPosts.length} 篇相关文章</p>
-      {filteredPosts.length > 0 ? (
+      <p class="mb-4 text-sm md:text-base">找到 {searchResults.length} 篇相关文章</p>
+      {searchResults.length > 0 ? (
         <ListSection>
-          {filteredPosts.map(post => (
+          {searchResults.map(result => (
             <ListItem 
-              href={`/posts/${post.slug}`} 
-              title={post.data.title} 
-              description={post.data.description} 
+              href={result.url} 
+              title={result.post.data.title} 
+              description={result.post.data.description} 
             />
           ))}
         </ListSection>
       ) : (
-        <p class="text-gray-500 dark:text-gray-400">没有找到相关文章</p>
+        <p class="text-gray-500 dark:text-gray-400">没有找到相关文章，请尝试其他关键词</p>
       )}
     </div>
   ) : (
-    <p class="text-gray-500 dark:text-gray-400">请在搜索框中输入关键词</p>
+    <p class="text-gray-500 dark:text-gray-400">请在搜索框中输入关键词开始搜索</p>
   )}
+  
+  <script is:inline>
+    // 页面加载时自动聚焦搜索框
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput && !searchInput.value) {
+        searchInput.focus();
+      }
+    });
+  </script>
 </LayoutDefault>
