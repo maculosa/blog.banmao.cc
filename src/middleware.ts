@@ -14,10 +14,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return key in localeTranslate;
   }
 
-  context.locals.translate = (key, param) => {
+  context.locals.translate = (key, ...params) => {
     if (!validateKey(key)) return key;
-    else if (!param) return localeTranslate[key];
-    else return localeTranslate[key].replace('%d', param.toString());
+    let result = localeTranslate[key];
+    params.forEach((param, index) => {
+      if (param !== undefined) {
+        result = result.replace(`%${index + 1}`, param.toString());
+      }
+    });
+    return result;
   }
   return next();
 });
