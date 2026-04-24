@@ -28,9 +28,11 @@ const image =
     format: "jpeg"
   }))
 const optimizedImage = new URL(image?.src??"/placeholder.png", Astro.url).toString()
+
+const localLang = Astro.locals.config.locale ?? "en"
 ---
 
-<html lang="en">
+<html lang={localLang}>
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
