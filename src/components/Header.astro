@@ -24,7 +24,31 @@ const { translate: t } = Astro.locals
   </hgroup>
 
   <nav class="text-center font-bold" un-flex="~ col gap-2">
-    <ul role="navigation" aria-label="主导航" un-lg="flex-col items-start text-4" class="text-3.5" un-flex="~ row gap-2 justify-center">
+    <!-- 移动端导航菜单 -->
+    <div class="lg:hidden mb-2">
+      <button 
+        id="nav-toggle" 
+        aria-label="切换导航菜单"
+        class="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+      >
+        <span class="icon i-mdi-menu"></span>
+      </button>
+      <ul id="mobile-nav" role="navigation" aria-label="主导航" class="hidden mt-2 space-y-2">
+        {
+          navs.map((nav) => (
+            <li>
+              <a href={nav.href} aria-label={t(nav.name)} class="block py-1">{t(nav.name)}</a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/search" aria-label="搜索" class="block py-1">搜索</a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- 桌面端导航菜单 -->
+    <ul role="navigation" aria-label="主导航" class="hidden lg:flex lg:flex-col lg:items-start lg:text-4 text-3.5 justify-center">
       {
         navs.map((nav) => (
           <li>
@@ -36,6 +60,7 @@ const { translate: t } = Astro.locals
         <a href="/search" aria-label="搜索">搜索</a>
       </li>
     </ul>
+    
     <ul role="navigation" aria-label="社交链接" un-flex="~ row gap-1 justify-center">
       {
         socials.map((soc) => (
@@ -55,4 +80,16 @@ const { translate: t } = Astro.locals
       </li>
     </ul>
   </nav>
+  
+  <script>
+    // 移动端导航菜单切换
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (navToggle && mobileNav) {
+      navToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('hidden');
+      });
+    }
+  </script>
 </header>

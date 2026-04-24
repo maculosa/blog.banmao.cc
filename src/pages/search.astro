@@ -1,0 +1,72 @@
+---
+import LayoutDefault from '~/layouts/LayoutDefault.astro'
+import ListSection from '~/components/ListSection.astro'
+import ListItem from '~/components/ListItem.astro'
+import { getPosts } from '~/utils'
+import type { Post } from '~/types'
+
+const posts = await getPosts()
+const searchQuery = Astro.url.searchParams.get('q') || ''
+
+let filteredPosts: Post[] = []
+
+if (searchQuery) {
+  const query = searchQuery.toLowerCase()
+  filteredPosts = posts.filter(post => {
+    const title = post.data.title?.toLowerCase() || ''
+    const description = post.data.description?.toLowerCase() || ''
+    const content = post.body?.toLowerCase() || ''
+    return title.includes(query) || description.includes(query) || content.includes(query)
+  })
+}
+
+// const { translate: t } = Astro.locals
+---
+
+<LayoutDefault title="搜索结果" desc="搜索文章">
+  <div class="mb-8">
+    <h1 class="text-6 font-bold mb-4">搜索结果</h1>
+    <div class="flex gap-2">
+      <form action="/search" method="get" class="flex w-full" aria-label="搜索表单">
+        <input 
+          type="text" 
+          name="q" 
+          placeholder="搜索文章..." 
+          value={searchQuery}
+          aria-label="搜索关键词"
+          aria-describedby="search-results"
+          class="flex-1 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button 
+          type="submit" 
+          aria-label="执行搜索"
+          class="p-3 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition-colors"
+        >
+          <span class="icon i-mdi-magnify"></span>
+          <span class="sr-only">搜索</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {searchQuery ? (
+    <div id="search-results">
+      <p class="mb-4">找到 {filteredPosts.length} 篇相关文章</p>
+      {filteredPosts.length > 0 ? (
+        <ListSection>
+          {filteredPosts.map(post => (
+            <ListItem 
+              href={`/posts/${post.slug}`} 
+              title={post.data.title} 
+              description={post.data.description} 
+            />
+          ))}
+        </ListSection>
+      ) : (
+        <p>没有找到相关文章</p>
+      )}
+    </div>
+  ) : (
+    <p>请在搜索框中输入关键词</p>
+  )}
+</LayoutDefault>
