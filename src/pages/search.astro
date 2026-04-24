@@ -134,7 +134,7 @@ const searchQuery = Astro.url.searchParams.get('q') || ''
         h3.setAttribute('class', 'post-title! text-base md:text-lg lg:text-xl');
 
         const link = document.createElement('a');
-        link.href = item.url;
+        link.href = validateUrl(item.url);
         link.textContent = item.title;
         link.className = 'hover:underline';
 
@@ -154,6 +154,17 @@ const searchQuery = Astro.url.searchParams.get('q') || ''
       section.appendChild(ul);
       searchList.innerHTML = '';
       searchList.appendChild(section);
+    }
+
+    function validateUrl(url) {
+      const pattern = /^(\/|[a-zA-Z][a-zA-Z\d+\-.]*:)/;
+      if (!pattern.test(url)) {
+        return '#';
+      }
+      if (url.startsWith('javascript:') || url.startsWith('data:')) {
+        return '#';
+      }
+      return url;
     }
 
     searchInput.addEventListener('input', (e) => {
