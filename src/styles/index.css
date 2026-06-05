@@ -160,6 +160,9 @@ body.dark article.heti blockquote {
   animation: fadeIn 0.7s ease-out;
 }
 
+article.heti {
+  max-width: 60em;
+}
 article.heti a:hover {
   padding-block-end: 0px;
   border-block-end: 1px solid rgba(0, 0, 0, 0);

@@ -1,11 +1,11 @@
-import { defineConfig } from 'astro/config'
-import UnoCSS from 'unocss/astro'
-import { THEME_CONFIG } from './src/theme.config'
-import robotsTxt from 'astro-robots-txt'
-import sitemap from '@astrojs/sitemap'
-import mdx from '@astrojs/mdx'
+import { defineConfig } from 'astro/config';
+import UnoCSS from 'unocss/astro';
+import { THEME_CONFIG } from './src/theme.config';
+import robotsTxt from 'astro-robots-txt';
+import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 // import icon from 'astro-icon'
-import vue from '@astrojs/vue'
+import vue from '@astrojs/vue';
 
 import react from '@astrojs/react';
 
@@ -20,13 +20,13 @@ export default defineConfig({
             wrap: true,
         },
     },
-    integrations: [UnoCSS({
+    integrations: [ UnoCSS({
         injectReset: true,
     }), robotsTxt(), sitemap(), mdx(), // icon(),
-    vue(), react()],
+    vue(), react() ],
     server: {
         headers: {
-            'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://disqus.com https://giscus.app https://cdn.staticfile.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https://disqus.com https://giscus.app; frame-src https://disqus.com https://giscus.app",
+            'Content-Security-Policy': 'default-src \'self\'; script-src \'self\' \'unsafe-inline\' https://disqus.com https://giscus.app https://cdn.staticfile.org; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https:; font-src \'self\' https:; connect-src \'self\' https://disqus.com https://giscus.app; frame-src https://disqus.com https://giscus.app',
             'X-Content-Type-Options': 'nosniff',
             'X-Frame-Options': 'SAMEORIGIN',
             'X-XSS-Protection': '1; mode=block',
@@ -35,4 +35,4 @@ export default defineConfig({
             'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
         },
     },
-})
+});

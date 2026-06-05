@@ -35,7 +35,7 @@ const { translate: t } = Astro.locals
         <span class="icon i-mdi-menu text-xl"></span>
         <span>菜单</span>
       </button>
-      <ul id="mobile-nav" role="navigation" aria-label="主导航" class="hidden mt-2 space-y-1 bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
+      <ul id="mobile-nav" role="navigation" aria-label="主导航" class="hidden mt-2 space-y-2 bg-gray-50 dark:bg-gray-800 rounded-lg p-2">
         {
           navs.map((nav) => (
             <li>
@@ -50,7 +50,7 @@ const { translate: t } = Astro.locals
     </div>
     
     {/* 桌面端导航菜单 */}
-    <ul role="navigation" aria-label="主导航" class="hidden lg:flex lg:flex-col lg:items-start lg:text-4 text-3.5 justify-center">
+    <ul role="navigation" aria-label="主导航" class="hidden space-y-2 lg:flex lg:flex-col lg:items-start lg:text-4 text-3.5 justify-center">
       {
         navs.map((nav) => (
           <li>
