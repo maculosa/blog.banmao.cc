@@ -4,6 +4,7 @@ description: PDF 本地化缓存，缓减带宽压力
 tags: [pdf, web, vue]
 categories: [笔记]
 lang: zh
+pubDate: 2026-06-05 10:10:20
 ---
 
 # PDF预览优化：避免自动下载
