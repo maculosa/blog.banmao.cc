@@ -1,6 +1,6 @@
 ---
 title: PDF 预览优化：避免自动优化
-description: 
+description: 点击乐企PDF发票预览时，浏览器会直接触发下载而不是页内预览。
 tags: [pdf, web, vue]
 categories: [笔记]
 lang: zh
